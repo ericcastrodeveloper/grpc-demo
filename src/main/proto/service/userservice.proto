@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package ="com.example.grpc.proto.service";
+option java_outer_classname = "UserServiceProto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
+message User {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message UserList {
+  repeated User resultList = 1;
+  google.protobuf.Int64Value resultCount = 2;
+}
+
+service UserService {
+  rpc create(User) returns (User) {};
+  rpc update(User) returns (User) {};
+  rpc findById(google.protobuf.Int64Value) returns (User) {};
+  rpc list(google.protobuf.Empty) returns (UserList) {};
+  rpc delete(google.protobuf.Int64Value) returns (google.protobuf.BoolValue) {};
+
+}
